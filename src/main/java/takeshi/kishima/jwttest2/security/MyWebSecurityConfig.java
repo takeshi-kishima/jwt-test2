@@ -39,6 +39,7 @@ public class MyWebSecurityConfig {
                 .anyRequest().authenticated() // その他はログイン後
             )
             .addFilter(new JWTAuthenticationFilter(manager)) // 使用するフィルタを登録する
+            .addFilterAfter(new JWTAuthorizationFilter(), JWTAuthenticationFilter.class); // 認可フィルタの利用設定
         ;
         return http.build();
     }

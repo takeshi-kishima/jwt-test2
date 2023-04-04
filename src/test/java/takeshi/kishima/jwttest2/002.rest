@@ -1,1 +1,2 @@
 GET http://localhost:4446/users
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJraXNpIiwiZXhwIjoxNjgxNDU3ODE3fQ.ndtNjJw5lObBNQEpt1t-cqRThFeLlkRSZea_3lBk580Hg-JIHNe1SUG_4MNVAP7hmAsCxSUkbPWo1RYTqHKJ8A

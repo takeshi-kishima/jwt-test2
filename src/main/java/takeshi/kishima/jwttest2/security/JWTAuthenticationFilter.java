@@ -1,6 +1,10 @@
 package takeshi.kishima.jwttest2.security;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static takeshi.kishima.jwttest2.security.SecurityConstants.EXPIRATION_TIME;
+import static takeshi.kishima.jwttest2.security.SecurityConstants.HEADER_STRING;
+import static takeshi.kishima.jwttest2.security.SecurityConstants.SECRET;
+import static takeshi.kishima.jwttest2.security.SecurityConstants.TOKEN_PREFIX;
 
 import java.io.IOException;
 import java.util.Date;
@@ -21,11 +25,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private static final String SECRET = "SecretKeyToGenJWTs";
-    private static final long EXPIRATION_TIME = 864_000_000; // 10 days
-    private static final String TOKEN_PREFIX = "Bearer ";
-    private static final String HEADER_STRING = "Authorization";
-
     private final ObjectMapper objectMpper = new ObjectMapper();
 
     public JWTAuthenticationFilter(final AuthenticationManager authenticationManager) {
@@ -41,7 +40,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             final UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(
                 form.getUsername(),
-                form.getPassword());
+                form.getPassword()
+            );
 
             return getAuthenticationManager().authenticate(creds); //★親クラスがやっているのは /login に対する POST
         } catch (final IOException e) {
@@ -56,8 +56,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         final Authentication auth) throws IOException, ServletException {
 
         final String token = JWT.create()
-            .withSubject(auth
-                .getName())
+            .withSubject(auth.getName())
             .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
