@@ -1,0 +1,9 @@
+server:
+  port: 4446
+logging:
+  level:
+    org: 
+        h2: debug
+# spring:
+#   datasource:
+#     url: jdbc:h2:file:~/demodb/kore
