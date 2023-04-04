@@ -6,7 +6,7 @@ Spring Security、JWTの一例です。
 1. h2databaseインメモリでユーザを保持させて動いてます
 1. O/RマッパーにJPA使ってます
 
-## 動作を見るには
+### 動作を見るには
 ユーザを新規追加して…
 ```
 curl -H "Content-Type: application/json" -X POST -d '{
