@@ -24,7 +24,7 @@ curl -i -H "Content-Type: application/json" -X POST -d '{
 ログインしたBearerトークンを使ってAPIが呼べる
 ```
 curl -i -H "Authorization: Bearer <loginで取得したトークン文字列>" \
-http://localhost:8080/users
+http://localhost:4446/users
 ```
 
 です！
